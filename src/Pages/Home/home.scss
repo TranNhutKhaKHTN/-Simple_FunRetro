@@ -1,0 +1,18 @@
+.body {
+  height: 100vw;
+  background-color: #f3f3f3;
+  padding: 30px;
+}
+
+.titleMyboard {
+  color: #283593;
+  font-size: 30px;
+  font-weight: bold;
+
+  padding: 10px;
+}
+
+.listboard {
+  display: flex;
+  flex-wrap: wrap;
+}
