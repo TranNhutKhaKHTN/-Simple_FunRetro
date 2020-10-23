@@ -1,11 +1,15 @@
 import { ClockCircleOutlined } from '@ant-design/icons';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './board.scss'
 
 const Board = (props) => {
   const data = props.data
+  // const route = useRouter();
+  // route.push("/login")
+
   return (
-    <div className="board">
+    <Link className="board" to="/boarddetail">
       <div className="board_name">{data.name}</div>
       <div className="board_infor">
         <div><ClockCircleOutlined /></div>
@@ -20,7 +24,7 @@ const Board = (props) => {
         </div>
         <div style={{ width: "10%" }}>i</div>
       </div>
-    </div>
+    </Link>
   );
 }
 

@@ -1,0 +1,47 @@
+.loginForm {
+  width: 400px;
+  height: 400px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-shadow: 0 14px 22px rgba(0, 0, 0, 0.16);
+
+  .inputLogin {
+    line-height: 25px;
+    font-size: 18px;
+
+    width: 90%;
+    outline: 0px;
+    border-width: 0px;
+
+    margin-top: 30px;
+    border-bottom: 1px solid #f2f2f2;
+    &:focus {
+      border-bottom: 2px solid #8e24aa;
+    }
+  }
+}
+
+.forgotpass {
+  margin-top: 10px;
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+  div {
+    cursor: pointer;
+    color: #9837b1;
+  }
+}
+
+.button-login {
+  width: 90%;
+  margin-top: 25px;
+  background-color: #af6dc0;
+}
+
+.gglogin {
+  margin-top: 20px;
+  background-color: #cd5441;
+}
