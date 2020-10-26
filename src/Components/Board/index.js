@@ -7,9 +7,10 @@ const Board = (props) => {
   const data = props.data
   // const route = useRouter();
   // route.push("/login")
+  const id = data._id
 
   return (
-    <Link className="board" to="/boarddetail">
+    <Link className="board" to={`/boarddetail/${id}`}>
       <div className="board_name">{data.name}</div>
       <div className="board_infor">
         <div><ClockCircleOutlined /></div>

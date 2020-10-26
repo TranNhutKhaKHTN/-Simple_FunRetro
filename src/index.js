@@ -12,16 +12,20 @@ import {
 import Login from './Pages/Login';
 import Home from './Pages/Home';
 import BoardDetail from './Pages/boardDetail';
+import { Provider } from 'react-redux';
+import store from './store'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Switch>
-        <Route path="/" exact><Home /></Route>
-        <Route path="/login"><Login /></Route>
-        <Route path="/boarddetail"><BoardDetail /></Route>
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/" exact><Home /></Route>
+          <Route path="/login"><Login /></Route>
+          <Route path="/boarddetail/:id"><BoardDetail /></Route>
+        </Switch>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

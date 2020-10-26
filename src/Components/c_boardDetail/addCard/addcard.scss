@@ -1,0 +1,63 @@
+.addcard {
+  margin-top: 10px;
+  border: 7px solid #009688;
+  padding: 3px;
+}
+
+.text-content {
+  width: 100%;
+  outline: 0;
+  border-width: 0px;
+  height: 30px;
+
+  overflow-wrap: break-word;
+  overflow: hidden;
+  resize: none;
+}
+
+.footer-card {
+  display: flex;
+  justify-content: space-between;
+  button {
+    font-size: 9px;
+    width: 40px;
+    padding: 2px;
+
+    cursor: pointer;
+    outline: 0;
+    border-width: 0px;
+    background-color: #00c853;
+    border-bottom: 2px solid #00a946;
+
+    &:hover {
+      background-color: #00a946;
+    }
+  }
+}
+
+.card {
+  margin-top: 10px;
+
+  background-color: #009688;
+  min-height: 50px;
+  padding: 10px;
+  color: white;
+
+  cursor: pointer;
+}
+
+.btndelete {
+  color: red;
+  cursor: pointer;
+  &:hover {
+    background-color: #f2f2f2;
+  }
+}
+
+.display {
+  display: block;
+}
+
+.nonedisplay {
+  display: none;
+}
