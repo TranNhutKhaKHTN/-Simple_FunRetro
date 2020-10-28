@@ -44,7 +44,9 @@ const AddCard = (props) => {
     // const cardInfor = { text: text };
     // props.onAddCard(cardInfor)
   }
+
   const cancelAddCard = () => {
+
     setDisplay(false)
     // props.cancelAddCard(props.value);
   }
