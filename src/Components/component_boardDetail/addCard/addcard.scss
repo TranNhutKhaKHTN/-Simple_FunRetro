@@ -22,6 +22,7 @@
     font-size: 9px;
     width: 40px;
     padding: 2px;
+    color: white;
 
     cursor: pointer;
     outline: 0;
@@ -44,6 +45,9 @@
   color: white;
 
   cursor: pointer;
+
+  display: flex;
+  justify-content: space-between;
 }
 
 .btndelete {
@@ -60,4 +64,16 @@
 
 .nonedisplay {
   display: none;
+}
+
+.iconEdit {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 5px;
+  &:hover {
+    background-color: #02692d;
+    opacity: 0.2;
+  }
 }
