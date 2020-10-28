@@ -32,6 +32,7 @@ const boardReducer = (state = initialState, action) => {
       }
     case type.ADD_DATA_TYPE1:
       // const data = [sa]
+      console.log(action.payload);
       return {
         ...state,
         data1: [...state.data1, action.payload]
