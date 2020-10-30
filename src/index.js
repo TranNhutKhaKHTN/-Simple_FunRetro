@@ -14,6 +14,7 @@ import Home from './Pages/Home';
 import BoardDetail from './Pages/boardDetail';
 import { Provider } from 'react-redux';
 import store from './store'
+import Logup from './Pages/Logup';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.render(
           <Route path="/" exact><Home /></Route>
           <Route path="/login"><Login /></Route>
           <Route path="/boarddetail/:id"><BoardDetail /></Route>
+          <Route path="/logup"><Logup /></Route>
         </Switch>
       </Router>
     </Provider>

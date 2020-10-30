@@ -1,4 +1,5 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import TextArea from 'antd/lib/input/TextArea';
 import Modal from 'antd/lib/modal/Modal';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -9,6 +10,7 @@ import { addDataType1, addDataType2, addDataType3 } from '../../../redux/action/
 import './addcard.scss'
 import fetchAddCard from './services/addCard';
 import deleteCard from './services/deleteCard'
+import updateCard from './services/updateCard'
 
 const AddCard = (props) => {
   const [text, setText] = useState("");
@@ -24,7 +26,7 @@ const AddCard = (props) => {
     setText(event.target.value)
   }
 
-  const onAddCard = async (e) => {
+  const onAddCard = async () => {
     const types = props.type
     setDisplay(false)
     const data = {
@@ -36,7 +38,7 @@ const AddCard = (props) => {
     console.log(types);
 
     const datas = await fetchAddCard(data)
-    console.log(datas);
+    // console.log(datas);
     let action;
     if (types === 1) {
       action = addDataType1(datas)
@@ -73,17 +75,33 @@ const AddCard = (props) => {
     setIsCard(3)
   }
 
-  const onDone = () => {
+  const onUpdateCard = async () => {
     setIsCard(1);
+    const types = props.type
+    const data = {
+      _id: props.data._id,
+      idBoard: id,
+      content: text,
+      type: types
+    }
+
+    let update
+    if (props.data.content !== text) {
+      update = await updateCard(data)
+    }
+    if (update === 500) {
+      alert("error update");
+    }
   }
 
   const handleOk = async () => {
     console.log(props.data._id);
+    setConfirmLoading(true);
     const status = await deleteCard(props.data._id)
     if (status === 200) {
       console.log("delete Success")
     }
-    setConfirmLoading(true);
+
     setTimeout(() => {
       setConfirmLoading(true);
       setDisplayModal(false)
@@ -102,38 +120,41 @@ const AddCard = (props) => {
   return (
     <div className={display ? "display" : "nonedisplay"}>
       <Modal
+        width="300px"
         title="XÓA CARD"
         visible={displayModal}
         onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
       >
-        <p>Bạn có muốn xóa card này không</p>
+        <p>Are you SURE?!!!</p>
       </Modal>
       {isCard === 1 ?
         (<div className="card" style={{ backgroundColor: props.color }}>
-          <div>{text}</div>
+          <div className="text-content">{text}</div>
           <div className="iconEdit" onClick={openUpdate}><EditOutlined /></div>
         </div>)
         :
         isCard === 2 ?
           <div>
             <div className="addcard" style={{ borderWidth: 7, borderColor: props.color }}>
-              <textarea className="text-content" value={text} onChange={changeText}></textarea>
+              <TextArea className="text-content" value={text} onChange={changeText} placeholder="text" autoSize />
               <div className="footer-card">
                 <button onClick={onAddCard}>Add</button>
                 <div className="btndelete" onClick={ondeleteCard}><DeleteOutlined /></div>
               </div>
             </div>
-          </div> : <div>
-            <div className="addcard" style={{ borderWidth: 7, borderColor: props.color }}>
-              <textarea className="text-content" value={text} onChange={changeText}></textarea>
-              <div className="footer-card">
-                <button onClick={onDone}>Done</button>
-                <div className="btndelete" onClick={ondeleteCard}><DeleteOutlined /></div>
-              </div>
+          </div>
+          :
+          <div className="addcard" style={{ borderWidth: 7, borderColor: props.color }}>
+            {/* <textarea className="text-content" value={text} onChange={changeText}></textarea> */}
+            <TextArea className="text-content" value={text} onChange={changeText} placeholder="text" autoSize />
+            <div className="footer-card">
+              <button onClick={onUpdateCard}>Done</button>
+              <div className="btndelete" onClick={ondeleteCard}><DeleteOutlined /></div>
             </div>
-          </div>}
+          </div>
+      }
     </div>
   );
 }

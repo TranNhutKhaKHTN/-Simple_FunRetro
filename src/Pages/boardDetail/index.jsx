@@ -42,6 +42,14 @@ const BoardDetail = (props) => {
       .catch(error => {
         console.log(error);
       })
+    return () => {
+      const action1 = fetchDataType1([])
+      const action2 = fetchDataType2([])
+      const action3 = fetchDataType3([])
+      dispatch(action1)
+      dispatch(action2)
+      dispatch(action3)
+    }
   }, [id, dispatch])
 
 

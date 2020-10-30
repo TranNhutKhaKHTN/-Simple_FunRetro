@@ -1,5 +1,6 @@
 .board {
   width: 210px;
+  height: fit-content;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -11,17 +12,17 @@
   margin: 10px;
 
   cursor: pointer;
-  box-shadow: 0 1.3px 2.1px rgba(0, 0, 0, 0.04), 0 10px 17px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0.9px 1.1px rgba(0, 0, 0, 0.085), 0 7px 9px rgba(0, 0, 0, 0.12);
 
   &:hover {
-    box-shadow: 0 1.3px 2.1px rgba(0, 0, 0, 0.11), 0 10px 17px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 1.3px 2.1px rgba(0, 0, 0, 0.11), 0 10px 17px rgba(0, 0, 0, 0.17);
   }
 }
 .board_infor {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-  margin-bottom: 25px;
+  // margin-bottom: 25px;
   padding-left: 20px;
   padding-right: 20px;
 
@@ -34,6 +35,9 @@
   border-top: 1px solid #f2f2f2;
   display: flex;
   justify-content: space-between;
+  height: 30px;
+  // align-self: flex-end;
+  // justify-self: flex-end;
   div {
     text-align: center;
     color: purple;
@@ -41,4 +45,31 @@
       background-color: #f3f3f3;
     }
   }
+}
+
+.board_numberofBoard {
+  // height: ;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.numberCard {
+  width: 30px;
+  height: 10px;
+  background-color: #009688;
+}
+
+.num1 {
+  background-color: #009688;
+}
+
+.num2 {
+  background-color: #e91e63;
+}
+
+.num3 {
+  background-color: #9c27b0;
 }
