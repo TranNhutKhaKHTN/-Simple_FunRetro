@@ -7,7 +7,7 @@ const ListBoard = (props) => {
   let listBoard
   if (data) {
     listBoard = data.map((board, index) => {
-      return <Board key={index} data={board}></Board>
+      return <Board key={index} data={board} />
     })
   }
   return (

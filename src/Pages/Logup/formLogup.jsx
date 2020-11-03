@@ -2,11 +2,15 @@ import { Button } from 'antd';
 import { useForm } from 'react-hook-form';
 import React from 'react';
 import Axios from 'axios';
+import { useHistory } from 'react-router-dom';
+// import { useDispatch } from 'react-redux';
 // import './formLogin.scss'
 
 const FormLogup = (props) => {
 
   const { register, handleSubmit, errors, watch } = useForm()
+  // const [success,setSuccess]=useState(false)
+  const router = useHistory();
 
   const onSubmit = (data) => {
     // console.log(data);
@@ -18,6 +22,8 @@ const FormLogup = (props) => {
     Axios.post('https://backendretro1712512.herokuapp.com/users/logup', { ...user })
       .then((res) => {
         console.log(res.data);
+        // setSuccess(true);
+        router.push("/login")
       })
       .catch((error) => {
         console.log(error);
