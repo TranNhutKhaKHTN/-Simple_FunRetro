@@ -34,6 +34,11 @@ const Home = (props) => {
       .catch((error) => {
         console.log(error);
       })
+
+    return () => {
+      const action = fetchBoard([])
+      dispatch(action)
+    }
   }, [router, dispatch, user])
 
   const CeateBoad = (data) => {

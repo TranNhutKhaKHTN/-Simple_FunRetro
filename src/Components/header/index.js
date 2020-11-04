@@ -26,6 +26,10 @@ const Header = (props) => {
   const clickLogin = () => {
     router.push('/login')
   }
+
+  const clickEditInfor = () => {
+    router.push('/userinformation')
+  }
   return (
     <div className="header">
       <Link style={{ color: "white" }} to='/'>KhaRetro</Link>
@@ -36,7 +40,7 @@ const Header = (props) => {
             <Button type="primary" danger style={{ marginRight: 15 }} onClick={onLogOut}>
               Logout
             </Button>
-            <Button danger style={{ marginRight: 15 }}>Edit Infor</Button>
+            <Button danger style={{ marginRight: 15 }} onClick={clickEditInfor}>Edit Infor</Button>
           </span>
           :
           <span>

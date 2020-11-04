@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import { useForm } from 'react-hook-form';
-import React from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
@@ -10,6 +10,7 @@ const FormLogup = (props) => {
 
   const { register, handleSubmit, errors, watch } = useForm()
   // const [success,setSuccess]=useState(false)
+  const [loadingRegiter, setLoadingRegiter] = useState(false)
   const router = useHistory();
 
   const onSubmit = (data) => {
@@ -19,19 +20,22 @@ const FormLogup = (props) => {
       password: data.password,
       username: data.username
     }
+    setLoadingRegiter(true)
     Axios.post('https://backendretro1712512.herokuapp.com/users/logup', { ...user })
       .then((res) => {
         console.log(res.data);
         // setSuccess(true);
+        setLoadingRegiter(false)
         router.push("/login")
       })
       .catch((error) => {
         console.log(error);
+        setLoadingRegiter(false)
       })
   }
   return (
     <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
-      <div style={{ fontSize: 25 }}><b>Login</b></div>
+      <div style={{ fontSize: 25 }}><b>Signup</b></div>
       <input name="name" placeholder="Your name" className="inputLogin" ref={register({ required: true })}></input>
       {errors.name && "name is required"}
       <input name="username" placeholder="User name" className="inputLogin" ref={register({ required: true })}></input>
@@ -40,7 +44,7 @@ const FormLogup = (props) => {
       {errors.password && "password not validate"}
       <input name="retype" type="password" placeholder="Retype Password" className="inputLogin" ref={register({ required: true, validate: value => value === watch('password') })}></input>
       {errors.retype && "retype not validate"}
-      <Button type="primary" htmlType="submit" className="button-login" size="large">
+      <Button type="primary" htmlType="submit" className="button-login" size="large" loading={loadingRegiter}>
         Register
       </Button>
     </form>

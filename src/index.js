@@ -16,6 +16,7 @@ import { Provider } from 'react-redux';
 import store from './store'
 import Logup from './Pages/Logup';
 import Header from './Components/header';
+import UserInfor from './Pages/userInfor';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -28,6 +29,7 @@ ReactDOM.render(
           <Route path="/login"><Login /></Route>
           <Route path="/boarddetail/:id"><BoardDetail /></Route>
           <Route path="/logup"><Logup /></Route>
+          <Route path="/userinformation"><UserInfor /></Route>
         </Switch>
       </Router>
     </Provider>

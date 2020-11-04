@@ -1,7 +1,9 @@
 .addcard {
-  margin-top: 10px;
+  margin-top: 0px;
   border: 7px solid #009688;
   padding: 3px;
+
+  background-color: white;
 }
 
 .text-content {
@@ -44,7 +46,8 @@
 }
 
 .card {
-  margin-top: 10px;
+  // margin-top: 10px;
+  // margin-bottom: 10px;
 
   background-color: #009688;
   min-height: 50px;

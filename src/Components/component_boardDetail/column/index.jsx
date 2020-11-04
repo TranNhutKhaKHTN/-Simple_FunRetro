@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Droppable } from 'react-beautiful-dnd';
 import AddCard from '../addCard';
 import './column.scss'
 
@@ -26,14 +27,16 @@ const Column = (props) => {
 
   const listAddCard = addCard.map((data, index) => {
     return (
-      <AddCard key={index} color={color} type={props.type}></AddCard>
+      <AddCard key={index} index={index} color={color} type={props.type}></AddCard>
     )
   })
   // console.log(props.data);
   const datas = props.data
   const listcard = datas.map((data, index) => {
     return (
-      <AddCard key={index} data={data} color={color} type={props.type}></AddCard>
+      <div>
+        <AddCard key={index} index={index} data={data} color={color} type={props.type}></AddCard>
+      </div>
     )
   })
 
@@ -42,8 +45,20 @@ const Column = (props) => {
       <span style={{ backgroundColor: "red", width: 7, height: 7 }}></span>
       <span className="column-name"><b>column name</b></span>
       <button className="btn-addcard" onClick={handlerAddCard}><b>+</b></button>
-      {listAddCard}
-      {listcard}
+
+      <Droppable droppableId={`${props.type}`}>
+
+        {provided => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {listAddCard}
+            {listcard}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
 
     </div>
   );

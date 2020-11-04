@@ -10,6 +10,8 @@ const initialState = {
 const boardReducer = (state = initialState, action) => {
   switch (action.type) {
     case type.ADD_USER:
+      const user = JSON.stringify(action.payload)
+      localStorage.setItem("user", user)
       return {
         ...state,
         user: action.payload

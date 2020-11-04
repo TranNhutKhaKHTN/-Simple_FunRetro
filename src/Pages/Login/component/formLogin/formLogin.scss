@@ -1,7 +1,8 @@
 .loginForm {
   width: 400px;
-  height: 400px;
-
+  min-height: 400px;
+  padding-top: 20px;
+  padding-bottom: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -48,7 +48,7 @@ const FormLogin = (props) => {
   }
   return (
     <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
-      <div style={{ fontSize: 25, marginTop: 25 }}><b>Login</b></div>
+      <div style={{ fontSize: 25, marginTop: 25 }}><b>Signin</b></div>
       <input placeholder="userame" name="username" className="inputLogin" ref={register({ required: true })}></input>
       <input placeholder="Password" type="password" name="password" className="inputLogin" ref={register({ required: true })}></input>
       <div className="forgotpass">
