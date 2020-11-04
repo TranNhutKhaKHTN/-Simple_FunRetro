@@ -106,7 +106,7 @@ const AddCard = (props) => {
       setConfirmLoading(true);
       setDisplayModal(false)
       setDisplay(false)
-    }, 1500);
+    }, 500);
 
   }
 

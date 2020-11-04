@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import AddBoard from '../../Components/addBoards';
-import Header from '../../Components/header';
+// import Header from '../../Components/header';
 import ListBoard from '../../Components/listBoard';
 import TabContent from '../../Components/tabContent';
 import './home.scss'
@@ -13,12 +13,12 @@ import UpdateBoard from '../../Components/updateBoard';
 const Home = (props) => {
   // const [board, setboard] = useState([]);
   const board = useSelector(state => state.home.board)
+  const user = useSelector(state => state.user.user)
   const dispatch = useDispatch();
 
   const router = useHistory()
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"))
-    if (!user) {
+    if (user === null) {
       router.push('/login')
       return;
     }
@@ -34,7 +34,7 @@ const Home = (props) => {
       .catch((error) => {
         console.log(error);
       })
-  }, [router, dispatch])
+  }, [router, dispatch, user])
 
   const CeateBoad = (data) => {
     console.log(data);
@@ -59,7 +59,7 @@ const Home = (props) => {
   return (
     <div>
       <div>
-        <Header />
+        {/* <Header /> */}
         <TabContent />
       </div>
       <div className="body">

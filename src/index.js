@@ -15,11 +15,14 @@ import BoardDetail from './Pages/boardDetail';
 import { Provider } from 'react-redux';
 import store from './store'
 import Logup from './Pages/Logup';
+import Header from './Components/header';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+
       <Router>
+        <Header />
         <Switch>
           <Route path="/" exact><Home /></Route>
           <Route path="/login"><Login /></Route>

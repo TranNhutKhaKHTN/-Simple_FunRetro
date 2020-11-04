@@ -1,6 +1,6 @@
 import Column from './../../Components/component_boardDetail/column';
 import React, { useEffect } from 'react';
-import Header from '../../Components/header';
+// import Header from '../../Components/header';
 import './boarddetail.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDataType1, fetchDataType2, fetchDataType3 } from './../../redux/action/board'
@@ -55,18 +55,15 @@ const BoardDetail = (props) => {
 
   // console.log(col1);
   return (
-    <div>
-      <Header></Header>
-      <div className="detail-body">
-        <div className="col-card">
-          <Column type={1} data={col1}></Column>
-        </div>
-        <div className="col-card">
-          <Column type={2} data={col2}></Column>
-        </div>
-        <div className="col-card">
-          <Column type={3} data={col3}></Column>
-        </div>
+    <div className="detail-body">
+      <div className="col-card">
+        <Column type={1} data={col1}></Column>
+      </div>
+      <div className="col-card">
+        <Column type={2} data={col2}></Column>
+      </div>
+      <div className="col-card">
+        <Column type={3} data={col3}></Column>
       </div>
     </div>
   );

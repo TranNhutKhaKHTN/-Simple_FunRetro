@@ -54,6 +54,9 @@ const Board = (props) => {
 
   const onUpdateCard = (e) => {
     e.preventDefault();
+    // const link = "hello every body";
+    // link.select()
+    // document.execCommand("copy");
     // setShowUpdate(true)
     const action = updateBoard(props.data);
     dispatch(action)
