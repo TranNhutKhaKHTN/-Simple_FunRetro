@@ -17,6 +17,7 @@ const AddCard = (props) => {
   const [text, setText] = useState("");
   const [isCard, setIsCard] = useState(2);
   const [display, setDisplay] = useState(true)
+  const [confirmLoading, setConfirmLoading] = useState(false)
   const dataBoard = useSelector(state => state.board.data)
 
   const params = useParams();
@@ -85,7 +86,11 @@ const AddCard = (props) => {
   }
 
   const handleOk = async () => {
+    setConfirmLoading(true)
     const status = await deleteCard(props.data._id)
+    setTimeout(() => {
+      setConfirmLoading(false)
+    }, 500)
     if (status === 200) {
       console.log("delete Success")
     }
@@ -97,7 +102,7 @@ const AddCard = (props) => {
       title: 'Do you Want to delete this items?',
       icon: <ExclamationCircleOutlined />,
       content: 'Are you sure',
-      confirmLoading: true,
+      confirmLoading: { confirmLoading },
       onOk() {
         handleOk()
       },

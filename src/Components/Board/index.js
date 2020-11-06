@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteBoard, updateBoard } from './../../redux/action/home'
 import { Link } from 'react-router-dom';
 import './board.scss'
-import { Modal } from 'antd';
+import { Button, Modal } from 'antd';
 // import UpdateBoard from '../updateBoard';
 
 const { confirm } = Modal;
@@ -19,9 +19,11 @@ const Board = (props) => {
   const data = props.data
   const [listCard, setListCard] = useState([])
   const listBoard = useSelector(state => state.home.board)
+  const [displayModalShare, setDisplayModalShare] = useState(false)
   // const [showUpdate, setShowUpdate] = useState(false)
   const dispatch = useDispatch()
-
+  const location = window.location.href
+  // console.log(loca);
   const id = data._id
   useEffect(() => {
     const cardOfBoard = async () => {
@@ -91,33 +93,66 @@ const Board = (props) => {
     return <div key={index} className="numberCard num3"></div>
   })
 
+  const onCopyLink = (e) => {
+    e.preventDefault()
+    setDisplayModalShare(true)
+  }
 
+  const CopyOK = () => {
+    setDisplayModalShare(false)
+  }
 
+  const CopyCancel = () => {
+    setDisplayModalShare(false)
+  }
+
+  const copylinkBoard = () => {
+    const idboard = `input${id}`
+    const copyText = document.getElementById(idboard);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999)
+    document.execCommand("copy");
+    alert("Copied the text: " + copyText.value);
+  }
   return (
-    <Link className="board" to={`/boarddetail/${id}`}>
-      <div>
-        <div className="board_name">{data.name}</div>
-        <div className="board_infor">
-          <div><ClockCircleOutlined /></div>
-          <div>Card: {listCard.length}</div>
+    <div>
+      <Modal
+        title="Title"
+        visible={displayModalShare}
+        onOk={CopyOK}
+        // confirmLoading={confirmLoading}
+        onCancel={CopyCancel}
+      >
+        <div className="modalInfor">
+          <input id={`input${id}`} value={`${location}boarddetail/${id}`} style={{ width: "80%" }} />
+          <span><Button type="primary" onClick={copylinkBoard}> Copy</Button></span>
         </div>
-      </div>
-      <div className="board_numberofBoard">
-        <div>{num1}</div>
-        <div>{num2}</div>
-        <div>{num3}</div>
-      </div>
-      <div className="board_gr">
-        <div style={{ width: "45%" }} className="board_action" onClick={onUpdateCard}>
-          UPDATE
+      </Modal>
+      <Link className="board" to={`/boarddetail/${id}`}>
+        <div>
+          <div className="board_name">{data.name}</div>
+          <div className="board_infor">
+            <div><ClockCircleOutlined /></div>
+            <div>Card: {listCard.length}</div>
+          </div>
         </div>
-        <div style={{ width: "45%" }} className="board_action" onClick={showConfirm}>
-          DELETE
+        <div className="board_numberofBoard">
+          <div>{num1}</div>
+          <div>{num2}</div>
+          <div>{num3}</div>
         </div>
-        <div style={{ width: "10%" }} className="board_action">i</div>
-      </div>
-      {/* <UpdateBoard showUpdate={showUpdate} /> */}
-    </Link>
+        <div className="board_gr">
+          <div style={{ width: "45%" }} className="board_action" onClick={onUpdateCard}>
+            UPDATE
+        </div>
+          <div style={{ width: "45%" }} className="board_action" onClick={showConfirm}>
+            DELETE
+        </div>
+          <div style={{ width: "10%" }} className="board_action" onClick={onCopyLink}>S</div>
+        </div>
+        {/* <UpdateBoard showUpdate={showUpdate} /> */}
+      </Link>
+    </div>
   );
 }
 
