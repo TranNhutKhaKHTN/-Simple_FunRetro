@@ -62,6 +62,20 @@ const boardReducer = (state = initialState, action) => {
         ...state,
         data3: [...state.data3, action.payload]
       }
+    case type.UPDATE_CARD:
+      const newcard = action.payload;
+      let i;
+      const newDataBoard = state.data.filter((card, index) => {
+        i = index
+        return newcard._id !== card._id
+      })
+      // console.log(i);
+      newDataBoard.splice(i, 0, newcard)
+      // console.log(newDataBoard);
+      return {
+        ...state,
+        data: newDataBoard
+      }
     default:
       return state
   }

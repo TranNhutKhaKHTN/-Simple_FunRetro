@@ -21,6 +21,13 @@ export const fetchDataType2 = (data) => {
   }
 }
 
+export const ACupdateCard = (data) => {
+  return {
+    type: type.UPDATE_CARD,
+    payload: data
+  }
+}
+
 export const fetchDataType3 = (data) => {
   return {
     type: type.FETCH_DATA_TYPE3,

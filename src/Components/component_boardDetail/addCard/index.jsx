@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchDataBoard } from '../../../redux/action/board';
+import { fetchDataBoard, ACupdateCard } from '../../../redux/action/board';
 import './addcard.scss'
 import fetchAddCard from './services/addCard';
 import deleteCard from './services/deleteCard'
@@ -63,6 +63,7 @@ const AddCard = (props) => {
 
   const onUpdateCard = async () => {
     setIsCard(1);
+    setDisplay(false)
     const types = props.type
     const data = {
       _id: props.data._id,
@@ -73,7 +74,10 @@ const AddCard = (props) => {
     let update
     if (props.data.content !== text) {
       update = await updateCard(data)
-      console.log(update);
+      // console.log(update);
+      const action = ACupdateCard(data)
+      // console.log(action);
+      dispatch(action)
     }
     if (update === 500) {
       alert("error update");

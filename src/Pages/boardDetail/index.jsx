@@ -1,9 +1,8 @@
 import Column from './../../Components/component_boardDetail/column';
 import React, { useEffect, useState } from 'react';
-// import Header from '../../Components/header';
 import './boarddetail.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDataBoard, fetchDataType1, fetchDataType2, fetchDataType3 } from './../../redux/action/board'
+import { fetchDataBoard } from './../../redux/action/board'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { DragDropContext } from 'react-beautiful-dnd';
@@ -13,9 +12,10 @@ const BoardDetail = (props) => {
   const dispatch = useDispatch()
   const match = useParams();
   const id = match.id
-  const col1 = useSelector(state => state.board.data1)
-  const col2 = useSelector(state => state.board.data2)
-  const col3 = useSelector(state => state.board.data3)
+  const dataBoard = useSelector(state => state.board.data)
+  const col1 = dataBoard.filter(data => data.type === 1)
+  const col2 = dataBoard.filter(data => data.type === 2)
+  const col3 = dataBoard.filter(data => data.type === 3)
 
   const [percent, setPercent] = useState(0);
   const [displayProg, setDisplayProg] = useState(false)
@@ -64,58 +64,21 @@ const BoardDetail = (props) => {
     const d = Number(destination.droppableId);
     let SRC = (s === 1 ? col1 : (s === 2 ? col2 : col3));
     let DES = (d === 1 ? col1 : (d === 2 ? col2 : col3));
+    const src = SRC[source.index];
+    const des = DES[destination.index];
 
-    if (SRC === DES) {
-      const newList = SRC.filter((_, idx) => (idx !== source.index))
-      // Then insert the item at the right location
-      newList.splice(destination.index, 0, SRC[source.index])
-      if (s === 1) {
-        const action1 = fetchDataType1(newList)
-        dispatch(action1)
-      }
-      if (s === 2) {
-        const action1 = fetchDataType2(newList)
-        dispatch(action1)
-      }
-      if (s === 3) {
-        const action1 = fetchDataType3(newList)
-        dispatch(action1)
-      }
+    const indexSource = dataBoard.indexOf(src);
+    const indexDes = dataBoard.indexOf(des);
+    const newSrc = {
+      ...src,
+      type: d
     }
-    else {
-      const newListSrc = SRC.filter((_, idx) => (idx !== source.index))
-      if (s === 1) {
-        const action1 = fetchDataType1(newListSrc)
-        dispatch(action1)
-      }
-      if (s === 2) {
-        const action1 = fetchDataType2(newListSrc)
-        dispatch(action1)
-      }
-      if (s === 3) {
-        const action1 = fetchDataType3(newListSrc)
-        dispatch(action1)
-      }
 
-      const newListDes = [...DES];
-      const data = {
-        ...SRC[source.index],
-        type: d
-      }
-      newListDes.splice(destination.index, 0, data)
-      if (d === 1) {
-        const action1 = fetchDataType1(newListDes)
-        dispatch(action1)
-      }
-      if (d === 2) {
-        const action1 = fetchDataType2(newListDes)
-        dispatch(action1)
-      }
-      if (d === 3) {
-        const action1 = fetchDataType3(newListDes)
-        dispatch(action1)
-      }
-    }
+    const newdata = dataBoard.filter((_, idx) => (idx !== indexSource))
+    newdata.splice(indexDes, 0, newSrc)
+
+    const action = fetchDataBoard(newdata);
+    dispatch(action)
   }
 
   return (
