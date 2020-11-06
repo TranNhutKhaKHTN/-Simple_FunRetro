@@ -18,10 +18,12 @@ const Column = (props) => {
 
 
   const handlerAddCard = () => {
+
     const n = addCard.length + 1
     const newadd = [...addCard, n];
     console.log(newadd);
     setAddCard(newadd)
+
   }
 
 
@@ -34,8 +36,8 @@ const Column = (props) => {
   const datas = props.data
   const listcard = datas.map((data, index) => {
     return (
-      <div>
-        <AddCard key={index} index={index} data={data} color={color} type={props.type}></AddCard>
+      <div key={index}>
+        <AddCard index={index} data={data} color={color} type={props.type}></AddCard>
       </div>
     )
   })

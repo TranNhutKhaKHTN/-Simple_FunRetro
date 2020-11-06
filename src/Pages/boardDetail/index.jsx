@@ -1,12 +1,13 @@
 import Column from './../../Components/component_boardDetail/column';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // import Header from '../../Components/header';
 import './boarddetail.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDataType1, fetchDataType2, fetchDataType3 } from './../../redux/action/board'
+import { fetchDataBoard, fetchDataType1, fetchDataType2, fetchDataType3 } from './../../redux/action/board'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { Progress } from 'antd';
 
 const BoardDetail = (props) => {
   const dispatch = useDispatch()
@@ -15,44 +16,42 @@ const BoardDetail = (props) => {
   const col1 = useSelector(state => state.board.data1)
   const col2 = useSelector(state => state.board.data2)
   const col3 = useSelector(state => state.board.data3)
+
+  const [percent, setPercent] = useState(0);
+  const [displayProg, setDisplayProg] = useState(false)
+
   useEffect(() => {
+    setDisplayProg(true)
+    setPercent(10)
     axios.get(`https://backendretro1712512.herokuapp.com/card/board=${id}`)
       .then(res => {
-        // setDataCard(res.data.data)
-        const dataCard = res.data.data
-        const col1 = dataCard.filter((data) => {
-          return data.type === 1
-        })
-        const col2 = dataCard.filter((data) => {
-          return data.type === 2
-        })
-        const col3 = dataCard.filter((data) => {
-          return data.type === 3
-        })
-
-        const action1 = fetchDataType1(col1)
-        const action2 = fetchDataType2(col2)
-        const action3 = fetchDataType3(col3)
-        dispatch(action1)
-        dispatch(action2)
-        dispatch(action3)
+        setTimeout(() => {
+          setPercent(70)
+        }, 100)
+        const dataCard = res.data.data;
+        setDisplayProg(true);
+        setTimeout(() => {
+          setPercent(100)
+        }, 200)
+        // setPercent(100)
+        setTimeout(() => {
+          const action = fetchDataBoard(dataCard);
+          dispatch(action);
+          setDisplayProg(false);
+          setPercent(0);
+        }, [300])
       })
       .catch(error => {
         console.log(error);
       })
     return () => {
-      const action1 = fetchDataType1([])
-      const action2 = fetchDataType2([])
-      const action3 = fetchDataType3([])
-      dispatch(action1)
-      dispatch(action2)
-      dispatch(action3)
+      const action = fetchDataBoard([]);
+      dispatch(action)
     }
   }, [id, dispatch])
 
   const onDragEnd = ({ source, destination }) => {
     if (destination === undefined || destination === null) return null
-
     // If the source and destination columns are the same
     // AND if the index is the same, the item isn't moving
     if (
@@ -120,19 +119,25 @@ const BoardDetail = (props) => {
   }
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="detail-body">
-        <div className="col-card">
-          <Column type={1} data={col1}></Column>
-        </div>
-        <div className="col-card">
-          <Column type={2} data={col2}></Column>
-        </div>
-        <div className="col-card">
-          <Column type={3} data={col3}></Column>
-        </div>
+    <div>
+      <div style={{ height: 3, display: "flex", alignItems: "center", overflow: "hidden", marginTop: 5 }}>
+        <Progress percent={percent} showInfo={false} className={displayProg ? null : "noneDisplay"} />
       </div>
-    </DragDropContext>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="detail-body">
+          <div className="col-card">
+            <Column type={1} data={col1}></Column>
+          </div>
+          <div className="col-card">
+            <Column type={2} data={col2}></Column>
+          </div>
+          <div className="col-card">
+            <Column type={3} data={col3}></Column>
+          </div>
+        </div>
+      </DragDropContext>
+    </div>
+
   );
 }
 

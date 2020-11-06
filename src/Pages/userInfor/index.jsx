@@ -3,6 +3,7 @@ import { Button, Input } from 'antd';
 import Axios from 'axios';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { addUser } from '../../redux/action/user';
 import './userinfor.scss'
 
@@ -41,22 +42,24 @@ const UserInfor = (props) => {
   }
 
   return (
-    <div style={{ display: "flex", alignItems: "center", flexDirection: "column", marginTop: 40 }}>
-      <div>{user.username}</div>
-      {edit
-        ?
-        <div className="user__username">
-          <div style={{ width: 150 }}><Input placeholder="Basic usage" defaultValue={user.name} onChange={changeText} /></div>
-          <div style={{ cursor: "pointer", marginLeft: 20 }}>
-            <Button type="primary" onClick={clickUpdateUser} loading={loadingButton}>Done</Button>
+    <div>
+      {user !== null ? <div style={{ display: "flex", alignItems: "center", flexDirection: "column", marginTop: 40 }}>
+        <div>{user.username}</div>
+        {edit
+          ?
+          <div className="user__username">
+            <div style={{ width: 150 }}><Input placeholder="Basic usage" defaultValue={user.name} onChange={changeText} /></div>
+            <div style={{ cursor: "pointer", marginLeft: 20 }}>
+              <Button type="primary" onClick={clickUpdateUser} loading={loadingButton}>Done</Button>
+            </div>
           </div>
-        </div>
-        : <div className="user__username">
-          <div>{user.name}</div>
-          <div style={{ cursor: "pointer", marginLeft: 20 }} onClick={() => setEdit(true)}>
-            <EditOutlined />
-          </div>
-        </div>}
+          : <div className="user__username">
+            <div>{user.name}</div>
+            <div style={{ cursor: "pointer", marginLeft: 20 }} onClick={() => setEdit(true)}>
+              <EditOutlined />
+            </div>
+          </div>}
+      </div> : <Redirect push to='/login'></Redirect>}
     </div>
   );
 }

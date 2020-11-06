@@ -1,6 +1,6 @@
 .board {
   width: 210px;
-  height: fit-content;
+  // height: fit-content;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -48,7 +48,7 @@
 }
 
 .board_numberofBoard {
-  // height: ;
+  height: 80%;
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
@@ -57,8 +57,8 @@
 }
 
 .numberCard {
-  width: 30px;
-  height: 10px;
+  width: 35px;
+  height: 5px;
   background-color: #009688;
 }
 

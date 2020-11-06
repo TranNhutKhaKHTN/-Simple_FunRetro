@@ -11,9 +11,22 @@ const initialState = {
 const boardReducer = (state = initialState, action) => {
   switch (action.type) {
     case type.FETCH_DATA:
+      const dataCard = action.payload
+      const col1 = dataCard.filter((data) => {
+        return data.type === 1
+      })
+      const col2 = dataCard.filter((data) => {
+        return data.type === 2
+      })
+      const col3 = dataCard.filter((data) => {
+        return data.type === 3
+      })
       return {
         ...state,
-        data: action.payload
+        data: action.payload,
+        data1: col1,
+        data2: col2,
+        data3: col3
       }
     case type.FETCH_DATA_TYPE1:
       return {

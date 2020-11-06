@@ -1,8 +1,8 @@
 import *as type from './../../actionType/board'
-export const fetchDataBoard = () => {
+export const fetchDataBoard = (data) => {
   return {
     type: type.FETCH_DATA,
-    payload: null
+    payload: data
   }
 
 }
