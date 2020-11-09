@@ -1,4 +1,4 @@
-import { ClockCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, DeleteOutlined, EditOutlined, ExclamationCircleOutlined, ShareAltOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -142,13 +142,13 @@ const Board = (props) => {
           <div>{num3}</div>
         </div>
         <div className="board_gr">
-          <div style={{ width: "45%" }} className="board_action" onClick={onUpdateCard}>
-            UPDATE
-        </div>
-          <div style={{ width: "45%" }} className="board_action" onClick={showConfirm}>
+          <div style={{ width: "40%", fontSize: 15 }} className="board_action" onClick={onUpdateCard}>
+            EDIT
+          </div>
+          <div style={{ width: "40%", fontSize: 15 }} className="board_action" onClick={showConfirm}>
             DELETE
-        </div>
-          <div style={{ width: "10%" }} className="board_action" onClick={onCopyLink}>S</div>
+          </div>
+          <div style={{ width: "20%", fontSize: 15 }} className="board_action" onClick={onCopyLink}><ShareAltOutlined /></div>
         </div>
         {/* <UpdateBoard showUpdate={showUpdate} /> */}
       </Link>

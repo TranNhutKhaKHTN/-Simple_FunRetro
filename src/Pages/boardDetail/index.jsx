@@ -22,7 +22,7 @@ const BoardDetail = (props) => {
 
   useEffect(() => {
     setDisplayProg(true)
-    setPercent(10)
+    setPercent(30)
     axios.get(`https://backendretro1712512.herokuapp.com/card/board=${id}`)
       .then(res => {
         setTimeout(() => {
