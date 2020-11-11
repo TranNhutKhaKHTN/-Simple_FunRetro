@@ -1,4 +1,4 @@
-import { ClockCircleOutlined, DeleteOutlined, EditOutlined, ExclamationCircleOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, ExclamationCircleOutlined, ShareAltOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

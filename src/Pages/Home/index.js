@@ -10,6 +10,9 @@ import { addBoard, fetchBoard } from '../../redux/action/home';
 import { useDispatch, useSelector } from 'react-redux';
 import UpdateBoard from '../../Components/updateBoard';
 
+//
+
+
 const Home = (props) => {
   // const [board, setboard] = useState([]);
   const board = useSelector(state => state.home.board)
@@ -17,6 +20,9 @@ const Home = (props) => {
   const dispatch = useDispatch();
 
   const router = useHistory()
+  // const socket = socketIOClient(ENDPOINT);
+  // socket.connect(ENDPOINT)
+
   useEffect(() => {
     if (user === null) {
       router.push('/login')

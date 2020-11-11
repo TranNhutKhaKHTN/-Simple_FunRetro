@@ -9,3 +9,5 @@ export const ADD_DATA_TYPE2 = "ADD_DATA_TYPE2"
 export const ADD_DATA_TYPE3 = "ADD_DATA_TYPE3"
 
 export const UPDATE_CARD = "UPDATE_CARD"
+
+export const RE_FETCH_DATA = "RE_FETCH_DATA"

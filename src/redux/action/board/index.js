@@ -55,3 +55,10 @@ export const addDataType3 = (data) => {
     payload: data
   }
 }
+
+export const reFetchData = () => {
+  return {
+    type: type.RE_FETCH_DATA,
+    payload: null
+  }
+}

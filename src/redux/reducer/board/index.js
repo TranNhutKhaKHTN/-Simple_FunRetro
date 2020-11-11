@@ -5,6 +5,7 @@ const initialState = {
   data1: [],
   data2: [],
   data3: [],
+  reFetchData: 0,
   loading: false
 }
 
@@ -75,6 +76,11 @@ const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         data: newDataBoard
+      }
+    case type.RE_FETCH_DATA:
+      return {
+        ...state,
+        reFetchData: state.reFetchData + 1
       }
     default:
       return state

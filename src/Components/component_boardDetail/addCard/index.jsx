@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchDataBoard, ACupdateCard } from '../../../redux/action/board';
+import { fetchDataBoard, ACupdateCard, reFetchData } from '../../../redux/action/board';
 import './addcard.scss'
 import fetchAddCard from './services/addCard';
 import deleteCard from './services/deleteCard'
@@ -39,6 +39,10 @@ const AddCard = (props) => {
     const datas = await fetchAddCard(data)
     const newData = [...dataBoard, datas]
     const action = fetchDataBoard(newData)
+
+    const refetchData = reFetchData()
+    dispatch(refetchData)
+
     dispatch(action)
   }
 
@@ -79,6 +83,8 @@ const AddCard = (props) => {
       const action = ACupdateCard(data)
       // console.log(action);
       dispatch(action)
+      const refetchData = reFetchData()
+      dispatch(refetchData)
     }
     if (update === 500) {
       alert("error update");
@@ -90,6 +96,8 @@ const AddCard = (props) => {
     const status = await deleteCard(props.data._id)
     setTimeout(() => {
       setConfirmLoading(false)
+      const refetchData = reFetchData()
+      dispatch(refetchData)
     }, 500)
     if (status === 200) {
       console.log("delete Success")

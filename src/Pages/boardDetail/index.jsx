@@ -8,10 +8,17 @@ import axios from 'axios';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Progress } from 'antd';
 
+//
+import socketIOClient from "socket.io-client";
+const ENDPOINT = "https://backendretro1712512.herokuapp.com/";
+
 const BoardDetail = (props) => {
   const dispatch = useDispatch()
   const match = useParams();
   const id = match.id
+  const refetchData = useSelector(state => state.board.reFetchData)
+  console.log(refetchData);
+
   const dataBoard = useSelector(state => state.board.data)
   const col1 = dataBoard.filter(data => data.type === 1)
   const col2 = dataBoard.filter(data => data.type === 2)
@@ -19,6 +26,20 @@ const BoardDetail = (props) => {
 
   const [percent, setPercent] = useState(0);
   const [displayProg, setDisplayProg] = useState(false)
+
+  useEffect(() => {
+    //connect
+    const socket = socketIOClient(ENDPOINT, { transports: ['websocket', 'polling', 'flashsocket'] });
+    socket.emit("fetchDataAllCard", { id: id });
+    socket.on(`fetchDataCardSuccess${id}`, data => {
+
+      const action = fetchDataBoard(data);
+      dispatch(action);
+    });
+    return () => {
+      socket.disconnect();
+    }
+  }, [id, dispatch, refetchData])
 
   useEffect(() => {
     setDisplayProg(true)
