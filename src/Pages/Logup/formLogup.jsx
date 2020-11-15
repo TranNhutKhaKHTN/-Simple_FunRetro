@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
-// import './formLogin.scss'
+import './formlogup.scss'
 
 const FormLogup = (props) => {
 
@@ -43,13 +43,13 @@ const FormLogup = (props) => {
     <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
       <div style={{ fontSize: 25 }}><b>Signup</b></div>
       <input name="name" placeholder="Your name" className="inputLogin" ref={register({ required: true })}></input>
-      {errors.name && "name is required"}
+      <div className="errormess">* {errors.name && "name is required"}</div>
       <input name="username" placeholder="User name" className="inputLogin" ref={register({ required: true })}></input>
-      {errors.username && "username is required"}
+      <div className="errormess">* {errors.username && "username is required"}</div>
       <input name="password" type="password" placeholder="Password" className="inputLogin" ref={register({ required: true })}></input>
-      {errors.password && "password not validate"}
+      <div className="errormess">* {errors.password && "password not validate"}</div>
       <input name="retype" type="password" placeholder="Retype Password" className="inputLogin" ref={register({ required: true, validate: value => value === watch('password') })}></input>
-      {errors.retype && "retype not validate"}
+      <div className="errormess">* {errors.retype && "retype not validate"}</div>
       <Button type="primary" htmlType="submit" className="button-login" size="large" loading={loadingRegiter}>
         Register
       </Button>

@@ -21,6 +21,7 @@ const UserInfor = (props) => {
   }
 
   const clickUpdateUser = () => {
+    if (newname === "") return
     setLoadingButton(true);
     const newUser = {
       ...user,

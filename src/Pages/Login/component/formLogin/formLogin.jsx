@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { useForm } from 'react-hook-form';
 import Axios from 'axios';
 import React, { useState } from 'react'
@@ -14,12 +14,6 @@ const FormLogin = (props) => {
   const router = useHistory()
   const { register, handleSubmit } = useForm()
   const dispatch = useDispatch()
-  // useEffect = (() => {
-  //   const user = localStorage.getItem("user")
-  //   if (user) {
-  //     router.push("/")
-  //   }
-  // })
 
   const onSubmit = (dataLogin) => {
     // console.log(dataLogin);
@@ -58,7 +52,9 @@ const FormLogin = (props) => {
         Login
       </Button>
 
-      <Button type="primary" className="button-login gglogin" size="large">
+      <Button type="primary" className="button-login gglogin" size="large" onClick={() => {
+        message.warning("Cái này em chưa làm ạ!")
+      }}>
         Login Google
       </Button>
       <div style={{ marginTop: 15, color: "#af6dc0" }}> Or register</div>
