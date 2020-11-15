@@ -3,9 +3,9 @@ import TextArea from 'antd/lib/input/TextArea';
 import { Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchDataBoard, ACupdateCard, reFetchData } from '../../../redux/action/board';
+import { reFetchData } from '../../../redux/action/board';
 import './addcard.scss'
 import fetchAddCard from './services/addCard';
 import deleteCard from './services/deleteCard'
@@ -18,7 +18,6 @@ const AddCard = (props) => {
   const [isCard, setIsCard] = useState(2);
   const [display, setDisplay] = useState(true)
   const [confirmLoading, setConfirmLoading] = useState(false)
-  const dataBoard = useSelector(state => state.board.data)
 
   const params = useParams();
   const id = params.id
@@ -36,14 +35,10 @@ const AddCard = (props) => {
       content: text,
       type: types
     }
-    const datas = await fetchAddCard(data)
-    const newData = [...dataBoard, datas]
-    const action = fetchDataBoard(newData)
+    await fetchAddCard(data)
 
     const refetchData = reFetchData()
     dispatch(refetchData)
-
-    dispatch(action)
   }
 
   const ondeleteCard = async () => {
@@ -79,10 +74,6 @@ const AddCard = (props) => {
     let update
     if (props.data.content !== text) {
       update = await updateCard(data)
-      // console.log(update);
-      const action = ACupdateCard(data)
-      // console.log(action);
-      dispatch(action)
       const refetchData = reFetchData()
       dispatch(refetchData)
     }

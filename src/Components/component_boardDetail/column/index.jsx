@@ -7,7 +7,7 @@ const Column = (props) => {
   const [addCard, setAddCard] = useState([]);
 
   const type = props.type;
-  let color;
+  let color = "#009688";
   if (type === 2) {
     color = "#E91E63"
   } else {
@@ -44,8 +44,10 @@ const Column = (props) => {
 
   return (
     <div>
-      <span style={{ backgroundColor: "red", width: 7, height: 7 }}></span>
-      <span className="column-name"><b>column name</b></span>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ backgroundColor: color, width: 12, height: 12, marginRight: 10 }}> </div>
+        <span className="column-name"><b> {props.name}</b></span>
+      </div>
       <button className="btn-addcard" onClick={handlerAddCard}><b>+</b></button>
 
       <Droppable droppableId={`${props.type}`}>

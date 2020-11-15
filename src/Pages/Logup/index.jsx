@@ -4,7 +4,7 @@ import FormLogup from './formLogup';
 function Logup(props) {
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: 50 }}>
-      <FormLogup></FormLogup>
+      <FormLogup />
     </div>
   );
 }

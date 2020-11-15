@@ -1,5 +1,5 @@
 import { EditOutlined } from '@ant-design/icons';
-import { Button, Input } from 'antd';
+import { Button, Input, message } from 'antd';
 import Axios from 'axios';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,12 +32,12 @@ const UserInfor = (props) => {
         setEdit(false)
         const action = addUser(newUser);
         dispatch(action)
-        alert("update success!")
+        message.success("Update user Success!")
       })
       .catch(() => {
         setLoadingButton(false);
         setEdit(false)
-        alert("update error!")
+        message.error("something is ERROR!")
       })
   }
 

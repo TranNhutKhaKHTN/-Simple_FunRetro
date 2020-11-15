@@ -17,7 +17,7 @@ import store from './store'
 import Logup from './Pages/Logup';
 import Header from './Components/header';
 import UserInfor from './Pages/userInfor';
-import NotFound from './Pages/notFond';
+import NotFound from './Pages/notFound';
 
 ReactDOM.render(
   <React.StrictMode>
