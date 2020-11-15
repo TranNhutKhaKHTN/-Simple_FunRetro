@@ -68,7 +68,7 @@ const AddCard = (props) => {
 
   const onUpdateCard = async () => {
     setIsCard(1);
-    setDisplay(false)
+    // setDisplay(false)
     const types = props.type
     const data = {
       _id: props.data._id,

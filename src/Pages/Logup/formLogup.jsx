@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { useForm } from 'react-hook-form';
 import React, { useState } from 'react';
 import Axios from 'axios';
@@ -26,7 +26,13 @@ const FormLogup = (props) => {
         console.log(res.data);
         // setSuccess(true);
         setLoadingRegiter(false)
-        router.push("/login")
+        if (res.data.status !== 200) {
+          console.log();
+          message.error(res.data.data);
+        }
+        else {
+          router.push('/login')
+        }
       })
       .catch((error) => {
         console.log(error);

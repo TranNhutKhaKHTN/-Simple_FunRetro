@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteBoard, updateBoard } from './../../redux/action/home'
 import { Link } from 'react-router-dom';
 import './board.scss'
-import { Button, Modal } from 'antd';
-// import UpdateBoard from '../updateBoard';
+import { Button, message, Modal } from 'antd';
 
 const { confirm } = Modal;
 const deleteItem = (array, id) => {
@@ -44,7 +43,6 @@ const Board = (props) => {
     confirm({
       title: 'Do you Want to delete this items?',
       icon: <ExclamationCircleOutlined />,
-      // content: 'Some descriptions',
       onOk() {
         onDeleteBoard()
       },
@@ -56,10 +54,6 @@ const Board = (props) => {
 
   const onUpdateCard = (e) => {
     e.preventDefault();
-    // const link = "hello every body";
-    // link.select()
-    // document.execCommand("copy");
-    // setShowUpdate(true)
     const action = updateBoard(props.data);
     dispatch(action)
   }
@@ -112,7 +106,8 @@ const Board = (props) => {
     copyText.select();
     copyText.setSelectionRange(0, 99999)
     document.execCommand("copy");
-    alert("Copied the text: " + copyText.value);
+    // alert("Copied the text: " + copyText.value);
+    message.success("copy link success!")
   }
   return (
     <div>

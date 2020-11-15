@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import './boarddetail.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDataBoard } from './../../redux/action/board'
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { Progress } from 'antd';
+import { message, Progress } from 'antd';
 
 //
 import socketIOClient from "socket.io-client";
@@ -14,10 +14,10 @@ const ENDPOINT = "https://backendretro1712512.herokuapp.com/";
 
 const BoardDetail = (props) => {
   const dispatch = useDispatch()
+  const route = useHistory();
   const match = useParams();
   const id = match.id
   const refetchData = useSelector(state => state.board.reFetchData)
-  console.log(refetchData);
 
   const dataBoard = useSelector(state => state.board.data)
   const col1 = dataBoard.filter(data => data.type === 1)
@@ -46,21 +46,28 @@ const BoardDetail = (props) => {
     setPercent(30)
     axios.get(`https://backendretro1712512.herokuapp.com/card/board=${id}`)
       .then(res => {
-        setTimeout(() => {
-          setPercent(70)
-        }, 100)
-        const dataCard = res.data.data;
-        setDisplayProg(true);
-        setTimeout(() => {
-          setPercent(100)
-        }, 200)
-        // setPercent(100)
-        setTimeout(() => {
-          const action = fetchDataBoard(dataCard);
-          dispatch(action);
-          setDisplayProg(false);
-          setPercent(0);
-        }, [300])
+        // console.log(res.data.data);
+        if (res.data.data.length === 0) {
+          message.error("Not fond board of your require!")
+          route.push('/notfound')
+        }
+        else {
+          setTimeout(() => {
+            setPercent(70)
+          }, 100)
+          const dataCard = res.data.data;
+          setDisplayProg(true);
+          setTimeout(() => {
+            setPercent(100)
+          }, 200)
+          // setPercent(100)
+          setTimeout(() => {
+            const action = fetchDataBoard(dataCard);
+            dispatch(action);
+            setDisplayProg(false);
+            setPercent(0);
+          }, [300])
+        }
       })
       .catch(error => {
         console.log(error);
@@ -69,7 +76,7 @@ const BoardDetail = (props) => {
       const action = fetchDataBoard([]);
       dispatch(action)
     }
-  }, [id, dispatch])
+  }, [id, dispatch, route])
 
   const onDragEnd = ({ source, destination }) => {
     if (destination === undefined || destination === null) return null

@@ -17,6 +17,7 @@ import store from './store'
 import Logup from './Pages/Logup';
 import Header from './Components/header';
 import UserInfor from './Pages/userInfor';
+import NotFound from './Pages/notFond';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -30,6 +31,7 @@ ReactDOM.render(
           <Route path="/boarddetail/:id"><BoardDetail /></Route>
           <Route path="/logup"><Logup /></Route>
           <Route path="/userinformation"><UserInfor /></Route>
+          <Route><NotFound /></Route>
         </Switch>
       </Router>
     </Provider>
