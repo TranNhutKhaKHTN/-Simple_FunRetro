@@ -137,13 +137,13 @@ const BoardDetail = (props) => {
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="detail-body">
           <div className="col-card">
-            <Column name="Went well" type={1} data={col1}></Column>
+            <Column name="Doing" type={1} data={col1}></Column>
           </div>
           <div className="col-card">
-            <Column name="To improve" type={2} data={col2}></Column>
+            <Column name="Test 1" type={2} data={col2}></Column>
           </div>
           <div className="col-card">
-            <Column name="Action items" type={3} data={col3}></Column>
+            <Column name="Test 2" type={3} data={col3}></Column>
           </div>
         </div>
       </DragDropContext>
