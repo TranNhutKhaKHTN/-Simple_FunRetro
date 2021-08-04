@@ -124,7 +124,7 @@ const AddCard = (props) => {
             <div style={{ marginBottom: 10, marginTop: 10 }}>
               {isCard === 1 ?
                 (<div className="card" style={{ backgroundColor: props.color }}>
-                  <div className="text-content">{text}</div>
+                  <pre className="text-content">{text}</pre>
                   <div className="iconEdit" onClick={openUpdate}><EditOutlined /></div>
                 </div>)
                 :
